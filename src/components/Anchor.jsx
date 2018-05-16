@@ -19,12 +19,17 @@ const Anchor = function(props) {
     xPage = evt.clientX;
     yPage = evt.clientY;
 
-    const CTM = evt.target.getScreenCTM(); // transforms web page -> svg coords
+    try {
+      const CTM = evt.target.getScreenCTM(); // transforms web page -> svg coords
 
-    const dxSVG = (dxPage - CTM.e) / CTM.a;
-    const dySVG = (dyPage - CTM.f) / CTM.d;
+      const dxSVG = (dxPage - CTM.e) / CTM.a;
+      const dySVG = (dyPage - CTM.f) / CTM.d;
 
-    props.dragCallback(dxSVG, dySVG, props.transIndex, props.xyIndex);
+      props.dragCallback(dxSVG, dySVG, props.transIndex, props.xyIndex);
+    }
+    catch (err) {
+      endDrag();
+    }
   }
 
   const endDrag = (evt) => {
