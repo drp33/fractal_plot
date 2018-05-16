@@ -11,7 +11,17 @@ const Transformation = function(props) {
     stroke-width="0.01"
   />;
 
-  const anchors = props.coords.map((xyPair) => <Anchor xyPair={xyPair} />);
+  const anchors = props.coords.map((xyPair, index) => {
+    return (
+      <Anchor
+        xyPair={xyPair}
+        transIndex={props.transIndex}
+        dragCallback={props.dragCallback}
+        xyIndex={index}
+        key={index}
+      />
+    );
+  });
 
   return [rect, ...anchors];
 }

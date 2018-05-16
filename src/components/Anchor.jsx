@@ -2,22 +2,28 @@ import React from 'react';
 
 const Anchor = function(props) {
 
-  let startX, startY = 0;
+  let xPage, yPage = 0; // x-y cursor coords (on the whole web page)
 
   const startDrag = (evt) => {
-    startX = evt.target.cx.animVal.value;
-    startY = evt.target.cy.animVal.value;
+    xPage = evt.clientX;
+    yPage = evt.clientY;
     evt.target.addEventListener('mousemove', drag);
     evt.target.addEventListener('mouseup', endDrag);
     evt.target.addEventListener('mouseleave', endDrag);
   }
 
   const drag = (evt) => {
-    const CTM = evt.target.getScreenCTM(); // for transforming svg ~ screen coords
-    const dx = startX - (evt.clientX - CTM.e) / CTM.a;
-    const dy = startY - (evt.clientY - CTM.f) / CTM.d;
-    console.log('dx:', dx, 'dy:', dy);
-    console.dir(evt.target);
+    const dxPage = evt.clientX - xPage;
+    const dyPage = evt.clientY - yPage;
+    xPage = evt.clientX;
+    yPage = evt.clientY;
+
+    const CTM = evt.target.getScreenCTM(); // transforms web page -> svg coords
+
+    const dxSVG = (dxPage - CTM.e) / CTM.a;
+    const dySVG = (dyPage - CTM.f) / CTM.d;
+
+    props.dragCallback(dxSVG, dySVG, props.transIndex, props.xyIndex);
   }
 
   const endDrag = (evt) => {
