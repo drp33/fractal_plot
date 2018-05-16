@@ -7,8 +7,8 @@ const Anchor = function(props) {
   const startDrag = (evt) => {
     xPage = evt.clientX;
     yPage = evt.clientY;
-    evt.target.addEventListener('mousemove', drag);
-    evt.target.addEventListener('mouseup', endDrag);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', endDrag);
     // evt.target.addEventListener('mouseleave', endDrag);
   }
 
@@ -27,8 +27,8 @@ const Anchor = function(props) {
   }
 
   const endDrag = (evt) => {
-    evt.target.removeEventListener('mousemove', drag);
-    evt.target.removeEventListener('mouseup', endDrag);
+    document.removeEventListener('mousemove', drag);
+    document.removeEventListener('mouseup', endDrag);
     // evt.target.removeEventListener('mouseleave', endDrag);
   }
 
