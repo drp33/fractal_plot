@@ -31,7 +31,7 @@ class DraggableSVG extends Component {
 
   render() {
     return (
-      <div className="transformation-view">
+      <div id="transformation-view">
         <svg viewBox="0 0 1 1">
           <TransformationList
             transforms={this.state.transforms}

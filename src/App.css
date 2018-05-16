@@ -2,7 +2,7 @@ body {
   background-color: rgb(200, 200, 200);
 }
 
-.transformation-view {
+#transformation-view {
   background-color: rgb(255, 255, 255);
   height: 500px;
   width: 500px;

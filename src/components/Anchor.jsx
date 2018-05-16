@@ -7,9 +7,10 @@ const Anchor = function(props) {
   const startDrag = (evt) => {
     xPage = evt.clientX;
     yPage = evt.clientY;
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', endDrag);
-    // evt.target.addEventListener('mouseleave', endDrag);
+
+    const container = document.getElementById('transformation-view');
+    container.addEventListener('mousemove', drag);
+    container.addEventListener('mouseup', endDrag);
   }
 
   const drag = (evt) => {
@@ -27,9 +28,9 @@ const Anchor = function(props) {
   }
 
   const endDrag = (evt) => {
-    document.removeEventListener('mousemove', drag);
-    document.removeEventListener('mouseup', endDrag);
-    // evt.target.removeEventListener('mouseleave', endDrag);
+    const container = document.getElementById('transformation-view');
+    container.removeEventListener('mousemove', drag);
+    container.removeEventListener('mouseup', endDrag);
   }
 
   const anchor = <circle
