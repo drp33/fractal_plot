@@ -8,7 +8,8 @@ const Transformation = function(props) {
     points={points}
     fill="none"
     stroke="black"
-    stroke-width="0.01"
+    strokeWidth="0.01"
+    key="-1"
   />;
 
   const anchors = props.coords.map((xyPair, index) => {
