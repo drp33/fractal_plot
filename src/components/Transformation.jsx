@@ -11,7 +11,12 @@ const Transformation = function(props) {
   />;
 
   const anchors = props.coords.map((xyPair) => {
-    const anchor = <circle cx={xyPair[0]} cy={xyPair[1]} r="0.02"/>;
+    const anchor = <circle
+      cx={xyPair[0]}
+      cy={xyPair[1]}
+      r="0.02"
+      className="draggable"
+    />;
     return anchor;
   });
 
