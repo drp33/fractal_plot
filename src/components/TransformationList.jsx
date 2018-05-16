@@ -2,7 +2,7 @@ import React from 'react';
 import Transformation from './Transformation.jsx';
 
 const TransformationList = function(props) {
-  return props.data.map((coords, index) => {
+  return props.transforms.map((coords, index) => {
     return (
       <Transformation
         coords={coords}

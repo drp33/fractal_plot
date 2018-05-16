@@ -9,7 +9,7 @@ const Anchor = function(props) {
     yPage = evt.clientY;
     evt.target.addEventListener('mousemove', drag);
     evt.target.addEventListener('mouseup', endDrag);
-    evt.target.addEventListener('mouseleave', endDrag);
+    // evt.target.addEventListener('mouseleave', endDrag);
   }
 
   const drag = (evt) => {
@@ -29,7 +29,7 @@ const Anchor = function(props) {
   const endDrag = (evt) => {
     evt.target.removeEventListener('mousemove', drag);
     evt.target.removeEventListener('mouseup', endDrag);
-    evt.target.removeEventListener('mouseleave', endDrag);
+    // evt.target.removeEventListener('mouseleave', endDrag);
   }
 
   const anchor = <circle
