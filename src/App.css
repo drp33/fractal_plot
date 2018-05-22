@@ -2,12 +2,44 @@ body {
   background-color: rgb(200, 200, 200);
 }
 
-#transformation-view {
-  background-color: rgb(255, 255, 255);
-  height: 500px;
-  width: 500px;
+.plot {
+  height: 40vw;
+  width: 40vw;
+  min-height: 40vw;
+  min-width: 40vw;
 }
 
 .draggable {
   cursor: move;
+}
+
+#root {
+}
+
+#plot-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+#transformation-view {
+  background-color: rgb(255, 255, 255);
+}
+
+#fractal-view {
+  background-color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 600px) {
+
+  .plot {
+    height: 40vh;
+    width: 40vh;
+    min-height: 40vh;
+    min-width: 40vh;
+  }
+
+  #plot-container {
+    flex-direction: column;
+  }
 }

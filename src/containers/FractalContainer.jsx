@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import TransformationPlot from '../components/TransformationPlot.jsx';
+import FractalPlot from '../components/FractalPlot.jsx';
 
 class FractalContainer extends Component {
   constructor(props) {
@@ -7,8 +8,9 @@ class FractalContainer extends Component {
 
     this.state = {
       transforms: [
-        [[0.1, 0.1], [0.9, 0.1], [0.9, 0.9], [0.1, 0.9]],
-        [[0.2, 0.2], [0.8, 0.2], [0.8, 0.8], [0.2, 0.8]]
+        [[0.25, 0], [0.75, 0], [0.75, 0.5], [0.25, 0.5]],
+        [[0, 0.5], [0.5, 0.5], [0.5, 1], [0, 1]],
+        [[0.5, 0.5], [1, 0.5], [1, 1], [0.5, 1]]
       ]
     };
 
@@ -31,11 +33,18 @@ class FractalContainer extends Component {
 
   render() {
     return (
-      <div id="transformation-view">
-        <TransformationPlot
-          dragCallback={this.dragCallback}
-          transforms={this.state.transforms}
-        />
+      <div id="plot-container">
+        <div id="transformation-view" className="plot">
+          <TransformationPlot
+            dragCallback={this.dragCallback}
+            transforms={this.state.transforms}
+          />
+        </div>
+        <div id="fractal-view" className="plot">
+          <FractalPlot
+            transforms={this.state.transforms}
+          />
+        </div>
       </div>
     )
   }

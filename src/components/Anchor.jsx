@@ -20,7 +20,7 @@ const Anchor = function(props) {
     yPage = evt.clientY;
 
     try {
-      const CTM = evt.target.getScreenCTM(); // transforms web page -> svg coords
+      const CTM = evt.target.getCTM(); // transforms web page -> svg coords
 
       const dxSVG = (dxPage - CTM.e) / CTM.a;
       const dySVG = (dyPage - CTM.f) / CTM.d;
