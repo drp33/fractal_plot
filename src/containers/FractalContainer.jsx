@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import TransformationList from '../components/TransformationList.jsx';
+import TransformationPlot from '../components/TransformationPlot.jsx';
 
-class DraggableSVG extends Component {
+class FractalContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -32,15 +32,13 @@ class DraggableSVG extends Component {
   render() {
     return (
       <div id="transformation-view">
-        <svg viewBox="0 0 1 1">
-          <TransformationList
-            transforms={this.state.transforms}
-            dragCallback={this.dragCallback}
-          />
-        </svg>
+        <TransformationPlot
+          dragCallback={this.dragCallback}
+          transforms={this.state.transforms}
+        />
       </div>
     )
   }
 }
 
-export default DraggableSVG;
+export default FractalContainer

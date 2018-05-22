@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import DraggableSVG from './containers/DraggableSVG.jsx';
+import FractalContainer from './containers/FractalContainer.jsx';
 
 class App extends Component {
   render() {
     return (
-      <DraggableSVG />
+      <FractalContainer />
     );
   }
 }
