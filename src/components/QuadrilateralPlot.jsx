@@ -1,10 +1,10 @@
 import React from 'react';
-import TransformationList from './TransformationList.jsx';
+import QuadrilateralList from './QuadrilateralList.jsx';
 
-const TransformationPlot = function(props) {
+const QuadrilateralPlot = function(props) {
   return (
     <svg viewBox="0 0 1 1">
-      <TransformationList
+      <QuadrilateralList
         transforms={props.transforms}
         dragCallback={props.dragCallback}
       />
@@ -12,4 +12,4 @@ const TransformationPlot = function(props) {
   )
 }
 
-export default TransformationPlot
+export default QuadrilateralPlot

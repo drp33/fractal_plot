@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import TransformationPlot from '../components/TransformationPlot.jsx';
+import QuadrilateralPlot from '../components/QuadrilateralPlot.jsx';
 import FractalPlot from '../components/FractalPlot.jsx';
+import Projection from '../manipulation/Projection.js';
 
 class FractalContainer extends Component {
   constructor(props) {
@@ -29,13 +30,14 @@ class FractalContainer extends Component {
     newTransforms[transIndex][xyIndex][1] += dy;
 
     this.setState({transforms: newTransforms});
+    Projection([[1, 0], [0, 1], [-1, -1], [2, 1]]);
   }
 
   render() {
     return (
       <div id="plot-container">
         <div id="transformation-view" className="plot">
-          <TransformationPlot
+          <QuadrilateralPlot
             dragCallback={this.dragCallback}
             transforms={this.state.transforms}
           />

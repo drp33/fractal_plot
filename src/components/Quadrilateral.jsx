@@ -1,7 +1,7 @@
 import React from 'react';
 import Anchor from './Anchor.jsx';
 
-const Transformation = function(props) {
+const Quadrilateral = function(props) {
 
   const points = props.coords.map(xyPair => xyPair.join(',')).join(' ');
   const rect = <polygon
@@ -27,4 +27,4 @@ const Transformation = function(props) {
   return [rect, ...anchors];
 }
 
-export default Transformation
+export default Quadrilateral

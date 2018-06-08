@@ -1,10 +1,10 @@
 import React from 'react';
-import Transformation from './Transformation.jsx';
+import Quadrilateral from './Quadrilateral.jsx';
 
-const TransformationList = function(props) {
+const QuadrilateralList = function(props) {
   return props.transforms.map((coords, index) => {
     return (
-      <Transformation
+      <Quadrilateral
         coords={coords}
         dragCallback={props.dragCallback}
         transIndex={index}
@@ -14,4 +14,4 @@ const TransformationList = function(props) {
   });
 }
 
-export default TransformationList
+export default QuadrilateralList
