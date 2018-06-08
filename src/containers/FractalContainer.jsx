@@ -30,7 +30,8 @@ class FractalContainer extends Component {
     newTransforms[transIndex][xyIndex][1] += dy;
 
     this.setState({transforms: newTransforms});
-    Projection([[1, 0], [0, 1], [-1, -1], [2, 1]]);
+    const p1 = new Projection();
+    p1.setTransformation([[1, 0], [0, 1], [-1, -1], [2, 1]]);
   }
 
   render() {
