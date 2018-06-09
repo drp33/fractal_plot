@@ -1,9 +1,9 @@
 import math from 'mathjs';
 
 const Ainv = [
-  [1,0,0],
-  [0,1,0],
-  [1,1,-1]
+  [-1,0,1],
+  [-1,1,0],
+  [0,1,0]
 ];
 
 const Projection = function() {
@@ -11,7 +11,7 @@ const Projection = function() {
 }
 
 Projection.prototype.setTransformation = function(coords) {
-  // coords should be points transformed from [[1,0],[0,1],[0,0],[1,1]]
+  // coords should be points transformed from [[0,0],[1,0],[1,1],[0,1]]
   // method adopted from https://math.stackexchange.com/questions/296794/finding-the-transform-matrix-from-4-projected-points-with-javascript/339033#339033
   const xp123 = math.flatten(math.subset(coords, math.index([0, 1, 2], 0)));
   const yp123 = math.flatten(math.subset(coords, math.index([0, 1, 2], 1)));
@@ -26,17 +26,22 @@ Projection.prototype.setTransformation = function(coords) {
   this.transformationMatrix = math.multiply(B, Ainv);
 }
 
-Projection.prototype.transform = function(coords) {
-  const newCoords = new Array(coords.length);
-  newCoords.forEach((xyPair, index) => {
-
-    const xyPrime = math.multiply(
-      this.transformationMatrix,
-      [[xyPair[0]],[xyPair[1],[1]]]
-    );
-
-    newCoords[index] = [xyPrime[0]/xyPrime[1], xyPrime[0]/xyPrime[2]];
-  });
+Projection.prototype.transform = function(shapes) {
+  let newShapes = [];
+  for (let i = 0; i < shapes.length; i++) {
+    let coords = shapes[i];
+    let newCoords = new Array(coords.length);
+    coords.forEach((xyPair, index) => {
+      let xyPrime = math.multiply(
+        this.transformationMatrix,
+        [[xyPair[0]],[xyPair[1]],[1]]
+      );
+      xyPrime = math.flatten(xyPrime);
+      newCoords[index] = [xyPrime[0]/xyPrime[2], xyPrime[1]/xyPrime[2]];
+    });
+    newShapes.push(newCoords);
+  }
+  return newShapes;
 }
 
 export default Projection

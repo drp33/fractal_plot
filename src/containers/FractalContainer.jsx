@@ -8,14 +8,12 @@ class FractalContainer extends Component {
     super(props);
 
     this.state = {
-      transforms: [
-        [[0.25, 0], [0.75, 0], [0.75, 0.5], [0.25, 0.5]],
-        [[0, 0.5], [0.5, 0.5], [0.5, 1], [0, 1]],
-        [[0.5, 0.5], [1, 0.5], [1, 1], [0.5, 1]]
-      ]
+      transforms: [],
+      shapes: []
     };
 
     this.dragCallback = this.dragCallback.bind(this);
+    this.addTransform = this.addTransform.bind(this);
   }
 
   dragCallback(dx, dy, transIndex, xyIndex) {
@@ -30,24 +28,49 @@ class FractalContainer extends Component {
     newTransforms[transIndex][xyIndex][1] += dy;
 
     this.setState({transforms: newTransforms});
-    const p1 = new Projection();
-    p1.setTransformation([[1, 0], [0, 1], [-1, -1], [2, 1]]);
+
+    const projections = this.state.transforms.map(transform => {
+      const projection = new Projection();
+      projection.setTransformation(transform);
+      return projection;
+    });
+
+    let shapes = [[[0,0],[1,0],[1,1],[0,1]]]; // this bit needs work..something not right!
+    for (let i = 0; i < 3; i++) {
+      let prevShapes = shapes.map(shape => shape.map(xyPair => xyPair.slice()));
+      shapes = [];
+      for (let j = 0; j < projections.length; j++) {
+        shapes = shapes.concat(projections[j].transform(prevShapes));
+      };
+    }
+    console.log(shapes);
+
+    this.setState({shapes: shapes});
+  }
+
+  addTransform() {
+    this.setState(prevState => ({ // needs improving - ...prevState.transforms only spreads the outermost array. Should treat as if immutable
+      transforms: [...prevState.transforms, [[0,0],[1,0],[1,1],[0,1]]]
+    }));
   }
 
   render() {
     return (
-      <div id="plot-container">
-        <div id="transformation-view" className="plot">
-          <QuadrilateralPlot
-            dragCallback={this.dragCallback}
-            transforms={this.state.transforms}
-          />
+      <div>
+        <div id="plot-container">
+          <div id="transformation-view" className="plot">
+            <QuadrilateralPlot
+              dragCallback={this.dragCallback}
+              transforms={this.state.transforms}
+            />
+          </div>
+          <div id="fractal-view" className="plot">
+            <FractalPlot
+              transforms={this.state.transforms}
+            />
+          </div>
         </div>
-        <div id="fractal-view" className="plot">
-          <FractalPlot
-            transforms={this.state.transforms}
-          />
-        </div>
+        <button id="btn-add-transformation" type="button" onClick={this.addTransform}>+</button>
       </div>
     )
   }
