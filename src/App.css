@@ -27,6 +27,11 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+#fractal-canvas {
+  height: 100%;
+  width: 100%;
+}
+
 @media screen and (max-width: 600px) {
 
   .plot {

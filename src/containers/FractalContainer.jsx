@@ -36,14 +36,13 @@ class FractalContainer extends Component {
     });
 
     let shapes = [[[0,0],[1,0],[1,1],[0,1]]]; // this bit needs work..something not right!
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 6; i++) {
       let prevShapes = shapes.map(shape => shape.map(xyPair => xyPair.slice()));
       shapes = [];
       for (let j = 0; j < projections.length; j++) {
         shapes = shapes.concat(projections[j].transform(prevShapes));
       };
     }
-    console.log(shapes);
 
     this.setState({shapes: shapes});
   }
@@ -66,7 +65,7 @@ class FractalContainer extends Component {
           </div>
           <div id="fractal-view" className="plot">
             <FractalPlot
-              transforms={this.state.transforms}
+              shapes={this.state.shapes}
             />
           </div>
         </div>
